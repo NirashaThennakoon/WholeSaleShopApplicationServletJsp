@@ -36,12 +36,13 @@ public class ServeletItem extends HttpServlet {
 
         switch (request.getParameter("action")) {
             case "save":
-                RequestDispatcher rd = request.getRequestDispatcher("/addItem.html");
+                
+                RequestDispatcher rd = request.getRequestDispatcher("/Item.jsp");
                 ItemDTO itemdto = new ItemDTO(
-                        request.getParameter("txtItemCode").toString(),
-                        request.getParameter("txtItemDescription").toString(),
-                        Double.parseDouble(request.getParameter("txtItemUnitPrice")),
-                        Integer.parseInt(request.getParameter("txtItemQtyOnHand")));
+                        request.getParameter("txtItemCode1").toString(),
+                        request.getParameter("txtItemDescription1").toString(),
+                        Double.parseDouble(request.getParameter("txtItemUnitPrice1")),
+                        Integer.parseInt(request.getParameter("txtQtyOnHand1")));
                  {
                     try {
                         boolean result = itemBO.add(itemdto);
@@ -53,12 +54,12 @@ public class ServeletItem extends HttpServlet {
                 }
 
             case "update":
-                RequestDispatcher rd2 = request.getRequestDispatcher("/Item.html");
+                RequestDispatcher rd2 = request.getRequestDispatcher("/Item.jsp");
                 ItemDTO itemdtoUpdate = new ItemDTO(
-                        request.getParameter("txtItemCode").toString(),
-                        request.getParameter("txtItemDescription").toString(),
-                        Double.parseDouble(request.getParameter("txtItemUnitPrice")),
-                        Integer.parseInt(request.getParameter("txtItemQtyOnHand")));
+                        request.getParameter("txtItemCode2").toString(),
+                        request.getParameter("txtItemDescription2").toString(),
+                        Double.parseDouble(request.getParameter("txtItemUnitPrice2")),
+                        Integer.parseInt(request.getParameter("txtQtyOnHand2")));
 
                 boolean resultUpdate;
                  {
@@ -74,10 +75,10 @@ public class ServeletItem extends HttpServlet {
             case "delete":
                 RequestDispatcher rd3 = request.getRequestDispatcher("/Item.jsp");
                 ItemDTO itemdtoDelete = new ItemDTO(
-                        request.getParameter("txtItemCode").toString(),
-                        request.getParameter("txtItemDescription").toString(),
-                        Double.parseDouble(request.getParameter("txtItemUnitPrice")),
-                        Integer.parseInt(request.getParameter("txtItemQtyOnHand")));
+                        request.getParameter("txtItemCode2").toString(),
+                        request.getParameter("txtItemDescription2").toString(),
+                        Double.parseDouble(request.getParameter("txtItemUnitPrice2")),
+                        Integer.parseInt(request.getParameter("txtQtyOnHand2")));
                 boolean resultDelete;
                  {
                     try {
@@ -90,6 +91,7 @@ public class ServeletItem extends HttpServlet {
                 }
 
             case "search":
+          
                 RequestDispatcher rd4 = request.getRequestDispatcher("/Item.jsp");
                 String code = request.getParameter("id");
                  {

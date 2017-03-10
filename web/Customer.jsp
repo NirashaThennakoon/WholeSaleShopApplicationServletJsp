@@ -58,13 +58,13 @@ and open the template in the editor.
                             
                         </div>
                         <div class="col-md-3">
-                            <a href="#">
+                            <a href="index.html">
                                 <span class="img_icon icon2"></span>
                                 <span class="link_title" style="color: white">Home</span>
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="#">
+                            <a href="searchAllCustomer.html">
                                 <span class="img_icon icon3"></span>
                                 <span class="link_title" style="color: white">All Customers</span>
                             </a>
@@ -178,21 +178,21 @@ and open the template in the editor.
             $("#btnSave").click(function () {
                 $("#frm").attr("action", "Servelet?action=save");
                 $("#frm").submit();
-
+                alert("Customer has been added");
             });
 
 
             $("#btnUpdate").click(function () {
                 $("#frm2").attr("action", "Servelet?action=update");
                 $("#frm2").submit();
-                alert("ddd");
+                alert("Customer has been updated");
             });
 
 
             $("#btnDelete").click(function () {
                 $("#frm2").attr("action", "Servelet?action=delete");
                 $("#frm2").submit();
-                alert("ddd");
+                alert("Customer has been deleted");
             });
 
 

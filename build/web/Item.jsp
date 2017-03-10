@@ -31,11 +31,10 @@ and open the template in the editor.
         <script src="js/jquery.min.js"></script>
 
 
-
         <style>
             .selectbox{
                 width: 100% ; 
-                height: 50px; 
+                height: 30px; 
                 margin: 0; 
                 padding: 0 20px; 
                 vertical-align: middle; 
@@ -58,28 +57,22 @@ and open the template in the editor.
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
                         <div class="col-md-3">
-                            <a href="#">
-                                <span class="img_icon icon1"></span>
+                            
+                        </div>
+                        <div class="col-md-3">
+                            <a href="index.html">
+                                <span class="img_icon icon2"></span>
                                 <span class="link_title" style="color: white">Home</span>
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="#">
-                                <span class="img_icon icon2"></span>
-                                <span class="link_title" style="color: white">Add Item</span>
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#">
+                            <a href="searchAllItems.jsp">
                                 <span class="img_icon icon3"></span>
                                 <span class="link_title" style="color: white">All Items</span>
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="#">
-                                <span class="img_icon icon4"></span>
-                                <span class="link_title" style="color: white">Other</span>
-                            </a>
+                            
                         </div>  
                     </div>
                     <div class="col-md-1"></div>
@@ -96,93 +89,133 @@ and open the template in the editor.
                 <div class="row" style="height: 10px"></div>
 
                 <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp">
-                        <div class="r-form-1-top">
-                            <div class="r-form-1-top-left">
-                                <h3>Search First!!!</h3>
+                    <div style="margin: 0px ; padding: 5px; border: 0px" class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp">
+                        
+                            <div class="r-form-1-top">
+                                <div class="r-form-1-top-left">
+                                    <h3>Enter Item details</h3>
+                                </div>
                             </div>
+                            <div class="r-form-1-bottom">
+                                <form role="form" id="frm" enctype="application/x-www-form-urlencoded" method="POST" action="ServeletItem">
+                                    <div class="form-group">
+                                        <label >Item Code</label>
+                                        <input type="text" name="txtItemCode1"  class="r-form-1-first-name form-control" id="txtItemCode1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label >Description</label>
+                                        <input type="text" name="txtItemDescription1"  class="r-form-1-last-name form-control" id="txtItemDescription1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Unit Price</label>
+                                        <input type="text" name="txtItemUnitPrice1"  class="r-form-1-email form-control" id="txtItemUnitPrice1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label >Qty on hand</label>
+                                        <input type="text" name="txtQtyOnHand1"  class="r-form-1-email form-control" id="txtQtyOnHand1">
+                                    </div>
+                                    <br>
+                                    <div><button id="btnSave" type="button" class="btn">Add</button></div>
+                                    <br>
+                                    <div><button id="btnAll" type="button" class="btn">All Items</button></div>
+                                    
+                                </form>
+                            </div>
+                        
+                    </div>
+                    <div style="margin: 0px ; padding: 5px; border: 0px" class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp">
+                        
+                            <div class="r-form-1-top">
+                                <div class="r-form-1-top-left">
+                                    <h3>Search First!!!</h3>
+                                </div>
 
-                        </div>
-                        <div class="r-form-1-bottom">
-                            <form role="form" id="frm" enctype="application/x-www-form-urlencoded" method="POST" action="ServeletItem">
-                                <div class="form-group">
-                                    <label>Code</label>
-                                    <select class="selectbox" name="txtItemCode" id="txtItemCode" onchange="loadItemDetails(this.value)">
-                                        <option selected disabled hidden>Select Item Code</option>
-                                        <%
-                                            ApplicationContext ctx = (ApplicationContext) new ClassPathXmlApplicationContext("lk/ijse/spring/SpringConfig.xml");
-                                            ItemBOImpl itemBO = (ItemBOImpl) ctx.getBean("itemBOImpl");
-                                            ArrayList<ItemDTO> items = itemBO.getAll();
-                                            for (ItemDTO item : items) {%>
-                                        <option value="<%= item.getCode()%>"><%= item.getCode()%></option>
-                                        <%
-                                            }
-                                        %>
+                            </div>
+                            <div class="r-form-1-bottom">
+                                <form role="form" id="frm2" enctype="application/x-www-form-urlencoded" method="POST" action="ServeletItem">
+                                    <div class="form-group">
+                                        <label>Item Code</label>
+                                        <select class="selectbox" name="txtItemCode2" id="txtItemCode2" onchange="loadItemDetails(this.value)">
+                                            <option selected disabled hidden>Select Item Code</option>
+                                            <%
+                                                ApplicationContext ctx = (ApplicationContext) new ClassPathXmlApplicationContext("lk/ijse/spring/SpringConfig.xml");
+                                                ItemBOImpl itemBO = (ItemBOImpl) ctx.getBean("itemBOImpl");
+                                                ArrayList<ItemDTO> items = itemBO.getAll();
+                                                for (ItemDTO item : items) {%>
+                                            <option value="<%= item.getCode()%>"><%= item.getCode()%></option>
+                                            <%
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <input type="text" name="txtItemDescription2" class="r-form-1-last-name form-control" id="txtItemDescription2">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Unit Price</label>
+                                        <input type="text" name="txtItemUnitPrice2" class="r-form-1-email form-control" id="txtItemUnitPrice2">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Qty on hand</label>
+                                        <input type="text" name="txtQtyOnHand2" class="r-form-1-email form-control" id="txtQtyOnHand2">
+                                    </div>
+                                        <br>
+                                    <div><button id="btnUpdate" type="button" class="btn">Update</button></div>
+                                    <br>
+                                    <div><button id="btnDelete" type="button" class="btn">Delete</button></div>
+                               
 
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <input type="text" name="txtItemDescription" class="r-form-1-last-name form-control" id="txtItemDescription">
-                                </div>
-                                <div class="form-group">
-                                    <label>Unit Price</label>
-                                    <input type="text" name="txtItemUnitPrice" class="r-form-1-email form-control" id="txtItemUnitPrice">
-                                </div>
-                                <div class="form-group">
-                                    <label>Qty on hand</label>
-                                    <input type="text" name="txtItemQtyOnHand" class="r-form-1-email form-control" id="txtItemQtyOnHand">
-                                </div>
-                                <div><button id="btnUpdate2" type="button" class="btn">Update</button></div>
-                                <br>
-                                <div><button id="btnDelete2" type="button" class="btn">Delete</button></div>
-                                <br>
-
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
 
         <script type="text/javascript">
+            
+            $("#btnSave").click(function () {
+                $("#frm").attr("action", "ServeletItem?action=save");
+                $("#frm").submit();
+                alert("Item has been added");
 
-            function loadItemDetails(txtItemCode) {
-                alert(txtItemCode);
+            });
+
+
+            $("#btnUpdate").click(function () {
+                $("#frm2").attr("action", "ServeletItem?action=update");
+                $("#frm2").submit();
+                alert("Item has been updated");
+            });
+
+
+            $("#btnDelete").click(function () {
+                $("#frm2").attr("action", "ServeletItem?action=delete");
+                $("#frm2").submit();
+                alert("Item has been deleted");
+            });
+
+
+
+            function loadItemDetails(txtItemCode2) {
+              
                 $.ajax("ServeletItem", {
                     accepts: {mycustomtype: "*/*"},
                     data: {
                         action: "search",
-                        id: txtItemCode
+                        id: txtItemCode2
                     },
                     method: "POST"
                 }).done(function (response) {
                     var message = JSON.parse(response);
-                    alert(message);
-                    $("#txtItemDescription").val(message.description);
-                    $("#txtItemUnitPrice").val(message.unitPrice);
-                    $("#txtItemQtyOnHand").val(message.qtyOnHand);
+                    $("#txtItemDescription2").val(message.description);
+                    $("#txtItemUnitPrice2").val(message.unitPrice);
+                    $("#txtQtyOnHand2").val(message.qtyOnHand);
 
                 });
-            }
-            
-            
-            
-           
-            $("#btnUpdate2").click(function () {
-            $("#frm").attr("action", "ServeletItem?action=update");
-            $("#frm").submit();
-            });
-            
-            
-            
-            $("#btnDelete2").click(function () {
-            alert(delete);
-            $("#frm").attr("action", "ServeletItem?action=delete");
-            $("#frm").submit();
-            });
             }
 
 

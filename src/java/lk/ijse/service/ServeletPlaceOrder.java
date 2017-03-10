@@ -7,6 +7,8 @@ package lk.ijse.service;
 
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -39,34 +41,31 @@ public class ServeletPlaceOrder extends HttpServlet {
         CustomerBOImpl customerBO = (CustomerBOImpl) ctx.getBean("customerBOImpl");
         ItemBOImpl itemBO = (ItemBOImpl) ctx.getBean("itemBOImpl");
         OrderBOImpl orderBO = (OrderBOImpl) ctx.getBean("orderBOImpl");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = sdf.format(new Date());
 
         switch (request.getParameter("action")) {
-            
-            
-//            case "save":
-//                Date date = null;
-//                OrderDTO o=new OrderDTO(
-//                        request.getParameter("orderId"),
-//                        request.getParameter("date"),
-//                        request.getParameter("custId")
-//                );
-//                String a="hi\n";
-//                //a+=request.getParameter("orderDetail")+"\n\n"+date;
-//                ArrayList<OrderDetailDTO> orderDetailDTOs=new ArrayList<>();
-//                JSONArray array=new JSONArray(request.getParameter("orderDetail"));
-//                for(int i=0;i<array.length();i++){
-//                    JSONObject ob=array.getJSONObject(i);
-//                    OrderDetailDTO orderDetailDTO=new OrderDetailDTO(
-//                            request.getParameter("orderId"), 
-//                            ob.getString("Code"), 
-//                            ob.getInt("Qty"), 
-//                            ob.getDouble("Unit Price")
-//                    );
-//                    orderDetailDTOs.add(orderDetailDTO);                            
+
+            case "save":
+//                System.out.println("come to save");
+//                RequestDispatcher rd = request.getRequestDispatcher("/PlaceOrder.jsp");
+//                Date date=parseDate(formattedDate);
+//                OrderDTO orderdto = new OrderDTO(
+//                        request.getParameter("orderId").toString(),
+//                        (request.getParameter("date")),
+//                        request.getParameter("custId").toString()
+//                        );
+//                 {
+//                    try {
+//                        boolean result = orderBO.add(orderdto);
+//                    } catch (Exception ex) {
+//                        Logger.getLogger(Servelet.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                    rd.include(request, response);
+//                    break;
 //                }
-//                boolean add = orderService.add(o, orderDetailDTOs);
-//                response.getOutputStream().print(add);
-//                break;
+                break;
+
 
             case "getOrderId":
                 OrderDTO orderDTO = new OrderDTO();
@@ -115,6 +114,15 @@ public class ServeletPlaceOrder extends HttpServlet {
 
         }
 
+    }
+    private Date parseDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return sdf.parse(date);
+        } catch (ParseException ex) {
+            
+        }
+        return null;
     }
 
     @Override

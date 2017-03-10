@@ -66,28 +66,22 @@ and open the template in the editor.
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
                         <div class="col-md-3">
-                            <a href="#">
-                                <span class="img_icon icon1"></span>
+
+                        </div>
+                        <div class="col-md-3">
+                            <a href="index.html">
+                                <span class="img_icon icon2"></span>
                                 <span class="link_title" style="color: white">Home</span>
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="#">
-                                <span class="img_icon icon2"></span>
-                                <span class="link_title" style="color: white">Place Order</span>
-                            </a>
-                        </div>
-                        <div class="col-md-3">
-                            <a href="#">
+                            <a href="AllOrders.jsp">
                                 <span class="img_icon icon3"></span>
                                 <span class="link_title" style="color: white">All Orders</span>
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="#">
-                                <span class="img_icon icon4"></span>
-                                <span class="link_title" style="color: white">Other</span>
-                            </a>
+
                         </div>  
                     </div>
                     <div class="col-md-1"></div>
@@ -107,9 +101,11 @@ and open the template in the editor.
                 <div class="row">
                     <div style="margin: 0px ; padding: 0px; border: 0px" class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp">
                         <div class="row" style="margin: 0px">
+
                             <div style="margin: 0px ; padding: 0px; border: 0px" class="col-md-6">
                                 <div class="r-form-1-bottom">
-                                    <form role="form" id="frm" enctype="application/x-www-form-urlencoded" method="POST" action="ServeletPlaceOrder">
+
+                                    <form role="form" id="frm1" enctype="application/x-www-form-urlencoded" method="POST" action="ServeletPlaceOrder">
                                         <div class="form-group">
                                             <label>Date</label>
                                             <input type="text" name="txtDate"  class="r-form-1-first-name form-control" id="txtDate">
@@ -123,7 +119,7 @@ and open the template in the editor.
                             </div>
                             <div style="margin: 0px ; padding: 0px; border: 0px" class="col-md-6">
                                 <div class="r-form-1-bottom">
-                                    <form role="form" id="frm" enctype="application/x-www-form-urlencoded" method="POST" action="ServeletPlaceOrder">
+                                    <form role="form" id="frm2" enctype="application/x-www-form-urlencoded" method="POST" action="ServeletPlaceOrder">
                                         <div class="form-group">
                                             <label>Customer Id</label>
                                             <select class="selectbox" name="txtCustomerId" id="txtCustomerId" onchange="loadCustomerDetails(this.value)">
@@ -145,6 +141,9 @@ and open the template in the editor.
                                     </form>
                                 </div>
                             </div>
+
+
+
                         </div>
                         <div class="row" style="height: 10px"></div>
                         <div class="row" style="margin: 0px">
@@ -285,7 +284,6 @@ and open the template in the editor.
                 }).done(function (response) {
                     var message = JSON.parse(response);
                     $("#txtCustomerName").val(message.name);
-
                 });
             }
 
@@ -304,7 +302,6 @@ and open the template in the editor.
                     $("#txtDescription").val(message.description);
                     $("#txtUnitPrice").val(message.unitPrice);
                     $("#txtQtyOnHand").val(message.qtyOnHand);
-
                 });
             }
 
@@ -324,50 +321,57 @@ and open the template in the editor.
                 var p = document.getElementById("txtUnitPrice").value;
                 var ammountValue = qtyV * p;
                 total += ammountValue;
-
                 desc.innerHTML = document.getElementById("txtDescription").value;
                 unnitprice.innerHTML = document.getElementById("txtUnitPrice").value;
                 qty.innerHTML = qtyV;
                 code.innerHTML = document.getElementById("txtItemCode").value;
                 ammount.innerHTML = ammountValue;
                 $("#txtTotal").val(total);
-
             }
 
 
-            $(document).ready(function () {
-//                getOrderId();
-//                var d = new Date();
-//                //alert(d.toDateString());
-//                $("#txtDate").val(d.toDateString());
-                $("#btnSave").click(function () {
-                    var table = $('#table').tableToJSON();
-                    //alert(JSON.stringify(table) + "\n" + customerId + "\n" + document.getElementById("orderId").value);
-                    $.ajax("ServeletPlaceOrder", {
-                        accepts: {mycustomtype: "*/*"},
-                        data: {
-                            action: "save",
-                            custId: txtCustomerId,
-                            orderId: document.getElementById("txtOrderId").value,
-                            date: document.getElementById("txtDate").value,
-                            orderDetail: JSON.stringify(table)
-                        },
-                        method: "POST"
 
-                    }).done(function (responce) {
-                        alert(responce);
-//           var message=JSON.parse(responce);
-//           $("#custName").val(message.name);
-                        if (responce) {
-                            location.reload();
-                        }
-                    });
+//                $("#btnSave").click(function () {
+//                    
+////                    var table = $("#table").tableToJSON();
+//                    
+//                    $.ajax("ServeletPlaceOrder", {
+//                        accepts: {mycustomtype: "*/*"},
+//                        data: {
+//                            action: "save",
+//                            custId: txtCustomerId,
+//                            orderId: document.getElementById("txtOrderId").value,
+//                            date: document.getElementById("txtDate").value
+////                            orderDetail: JSON.stringify(table)
+//                        },
+//                        method: "POST"
+//                    }).done(function (responce) {
+//                        alert(responce);
+//                        if (responce) {
+//                            location.reload();
+//                        }
+//                    });
+//
+//                });
 
+            $("#btnSave").click(function () {
+                $.ajax("ServeletPlaceOrder", {
+                    accepts: {mycustomtype: "*/*"},
+                    data: {
+                        action: "save",
+                        orderId: txtOrderId,
+                        date: txtDate,
+                        custId: txtCustomerId
+                        
+                    },
+                    method: "POST"
+                }).done(function (responce) {
+                    alert(responce);
+                    if (responce) {
+                        location.reload();
+                    }
                 });
-
             });
-
-
         </script>
 
         <script src="js/bootstrap.min.js"></script>
